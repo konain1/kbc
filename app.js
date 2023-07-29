@@ -54,6 +54,14 @@ function showQuestion(){
 
     let currentQuestion = questions[currentQuestionIndex]
     let questionNo = currentQuestionIndex + 1
-    console.log(currentQuestion)
+    questionElement.innerHTML = questionNo + " . " + currentQuestion.sawal
+
+    currentQuestion.jawab.forEach((answer)=>{
+        const btn = document.createElement('button');
+        btn.innerHTML = answer.text;
+        btn.classList.add("btn");
+        answerDiv.appendChild(btn)
+    })
+
 }
 showQuestion()
