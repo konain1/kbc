@@ -61,7 +61,33 @@ function showQuestion(){
         btn.innerHTML = answer.text;
         btn.classList.add("btn");
         answerDiv.appendChild(btn)
+
+        if(answer.correct){
+            btn.dataset.correct = answer.correct;
+        }
+
+        btn.addEventListener('click',SelectAnswer);
+
+
+
     })
 
 }
+
+function SelectAnswer(e){
+
+    let selectedBtn = e.target
+    let isCorrect = selectedBtn.dataset .correct === "true"
+
+
+    if(isCorrect){
+        selectedBtn.classList.add('correct')
+    }else{
+        selectedBtn.classList.add('incorrect')
+    }
+
+}
+
+
+
 showQuestion()
