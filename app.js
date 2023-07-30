@@ -47,12 +47,11 @@ function startKBC(){
     currentQuestionIndex = 0;
     score = 0;
     Next.innerHTML = 'Next'
-    removePrevQA()
     showQuestion();
 }
 
 function showQuestion(){
-
+    removePrevQA()
     let currentQuestion = questions[currentQuestionIndex]
     let questionNo = currentQuestionIndex + 1
     questionElement.innerHTML = questionNo + " . " + currentQuestion.sawal
@@ -113,7 +112,8 @@ function nextQuestion (){
 
     if(currentQuestionIndex < questions.length){
 
-        removePrevQA();
+        // removePrevQA();
+        showQuestion()
 
 
     }else {
@@ -136,10 +136,13 @@ function showScoreBoard(){
 
 function removePrevQA(){
 
-    Array.from(answerDiv.children).forEach((item)=>{
-        item.remove();
-    })
-    showQuestion()
+   
+    while(answerDiv.firstChild){
+        answerDiv.removeChild(answerDiv.firstChild)
+
+    }    
+    // showQuestion()
+ 
 
 }
 
