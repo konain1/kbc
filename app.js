@@ -59,12 +59,16 @@ function showQuestion(){
     currentQuestion.jawab.forEach((answer)=>{
         const btn = document.createElement('button');
         btn.innerHTML = answer.text;
+        btn.dataset.correct = answer.correct
         btn.classList.add("btn");
         answerDiv.appendChild(btn)
 
-        if(answer.correct){
-            btn.dataset.correct = answer.correct;
-        }
+
+        // it will set the attribute on button dataset={true/false}
+
+        // if(answer.correct){
+        //     btn.dataset.correct = answer.correct;
+        // }
 
         btn.addEventListener('click',SelectAnswer);
 
@@ -77,17 +81,40 @@ function showQuestion(){
 function SelectAnswer(e){
 
     let selectedBtn = e.target
-    let isCorrect = selectedBtn.dataset .correct === "true"
+    let isCorrect = selectedBtn.dataset.correct === "true"
+
+    console.log(isCorrect)
 
 
     if(isCorrect){
         selectedBtn.classList.add('correct')
+        score++
     }else{
         selectedBtn.classList.add('incorrect')
     }
 
+   Array.from(answerDiv.children).forEach((b)=>{
+        if(b.dataset.correct === "true"){
+            console.log(b)
+            b.classList.add('correct')
+        }
+
+        b.disabled = true
+    })
+    Next.style.display = "block"
+
+    Next.addEventListener('click',nextQuestion);
 }
 
+
+function nextQuestion (){
+    currentQuestionIndex++;
+
+    if(currentQuestionIndex < questions.length){
+        
+    }
+
+}
 
 
 showQuestion()
