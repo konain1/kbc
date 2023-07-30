@@ -47,6 +47,7 @@ function startKBC(){
     currentQuestionIndex = 0;
     score = 0;
     Next.innerHTML = 'Next'
+    removePrevQA()
     showQuestion();
 }
 
@@ -111,10 +112,35 @@ function nextQuestion (){
     currentQuestionIndex++;
 
     if(currentQuestionIndex < questions.length){
-        
+
+        removePrevQA();
+
+
+    }else {
+        showScoreBoard()
     }
 
 }
 
+function showScoreBoard(){
+
+    questionElement.innerHTML = `your score ${score} out of ${questions.length}`    
+
+    Next.innerHTML = 'Play again'
+    Next.style.display = 'block'
+
+    Next.addEventListener('click',()=>{
+        startKBC();
+    })
+}
+
+function removePrevQA(){
+
+    Array.from(answerDiv.children).forEach((item)=>{
+        item.remove();
+    })
+    showQuestion()
+
+}
 
 showQuestion()
