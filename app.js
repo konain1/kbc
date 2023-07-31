@@ -51,9 +51,13 @@ function startKBC(){
 }
 
 function showQuestion(){
+
     removePrevQA()
+
+    console.log(currentQuestionIndex)
     let currentQuestion = questions[currentQuestionIndex]
     let questionNo = currentQuestionIndex + 1
+
     questionElement.innerHTML = questionNo + " . " + currentQuestion.sawal
 
     currentQuestion.jawab.forEach((answer)=>{
@@ -106,32 +110,38 @@ function SelectAnswer(e){
     Next.addEventListener('click',nextQuestion);
 }
 
-
-function nextQuestion (){
+function handleNext(){
     currentQuestionIndex++;
 
     if(currentQuestionIndex < questions.length){
-
-        // removePrevQA();
         showQuestion()
-
-
     }else {
         showScoreBoard()
     }
 
 }
 
+function nextQuestion (){
+
+    if(currentQuestionIndex < questions.length){
+        handleNext()
+    }else {
+        startKBC()
+    }
+
+}
+
 function showScoreBoard(){
+    removePrevQA()
 
     questionElement.innerHTML = `your score ${score} out of ${questions.length}`    
 
     Next.innerHTML = 'Play again'
     Next.style.display = 'block'
 
-    Next.addEventListener('click',()=>{
-        startKBC();
-    })
+    // Next.addEventListener('click',()=>{
+    //     startKBC();
+    // })
 }
 
 function removePrevQA(){
